@@ -4,71 +4,335 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Happy Birthday 💗</title>
+    <title>A Birthday Memory Hunt 💌</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
+
+        /* =========================
+           GENERAL
+        ========================= */
+
         * {
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             margin: 0;
             min-height: 100vh;
-            font-family: Georgia, serif;
-            background: linear-gradient(135deg, #ffd6e7, #fff0f6);
-            color: #5a3045;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,.8), transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(220,239,220,.7), transparent 25%),
+                #fce9ef;
+            color: #3f5544;
+            font-family: "Poppins", sans-serif;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* =========================
+           HOME PAGE
+        ========================= */
+
+        #home {
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
+            padding: 40px 20px;
         }
 
-        .container {
-            width: 90%;
-            max-width: 700px;
-            padding: 50px 25px;
+        .home-card {
+            max-width: 800px;
+            width: 100%;
+            padding: 60px 30px;
+        }
+
+        .birthday-title {
+            color: #b5486d;
+            font-family: "DM Serif Display", serif;
+            font-size: clamp(4rem, 11vw, 8rem);
+            line-height: .85;
+            margin: 0 auto 25px;
+            transform: rotate(-2deg);
+            text-shadow: 2px 3px 0 rgba(255,255,255,.8);
+        }
+
+        .birthday-subtitle {
+            font-family: "Playfair Display", serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #526958;
+            margin-bottom: 10px;
         }
 
         .heart {
-            font-size: 70px;
+            font-size: 65px;
+            display: inline-block;
             animation: heartbeat 1.5s infinite;
+            margin: 15px 0 25px;
         }
 
-        h1 {
-            font-size: 3rem;
-            margin: 15px 0;
+        .home-question {
+            font-family: "Playfair Display", serif;
+            font-size: 1.25rem;
+            max-width: 550px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 35px;
+        .button-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
-        button {
-            background: #e75480;
-            color: white;
+        .answer-button {
             border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
+            padding: 14px 32px;
+            border-radius: 40px;
             font-size: 1rem;
             cursor: pointer;
-            transition: transform 0.2s, background 0.2s;
+            transition: all .25s ease;
         }
 
-        button:hover {
-            background: #d63d6d;
-            transform: scale(1.05);
+        .yes-button {
+            background: #b5486d;
+            color: white;
+            box-shadow: 0 8px 20px rgba(181,72,109,.25);
         }
 
-        #message {
+        .yes-button:hover {
+            transform: translateY(-3px) scale(1.04);
+            background: #963957;
+        }
+
+        .no-button {
+            background: white;
+            color: #b5486d;
+            border: 1px solid #e8b7c7;
+        }
+
+        .no-button:hover {
+            transform: translateY(-3px);
+            background: #fff7fa;
+        }
+
+        .tiny-note {
+            margin-top: 25px;
+            font-size: .75rem;
+            color: #789080;
+        }
+
+        /* =========================
+           MEMORY HUNT
+        ========================= */
+
+        #hunt {
             display: none;
-            margin-top: 35px;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 30px;
-            border-radius: 20px;
-            line-height: 1.7;
-            box-shadow: 0 10px 30px rgba(150, 70, 100, 0.15);
+            min-height: 100vh;
+            padding: 50px 20px 80px;
         }
+
+        .hunt-header {
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .eyebrow {
+            color: #a88346;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: .75rem;
+            font-weight: 600;
+        }
+
+        .hunt-title {
+            font-family: "DM Serif Display", serif;
+            color: #48614e;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            margin: 10px 0;
+        }
+
+        .hunt-description {
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.8;
+            color: #5c6f61;
+        }
+
+        /* Progress */
+
+        .progress-area {
+            margin: 30px auto 40px;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .progress-text {
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .progress-hearts {
+            letter-spacing: 7px;
+            font-size: 1.2rem;
+        }
+
+        .empty-heart {
+            opacity: .25;
+        }
+
+        /* Photo wall */
+
+        .memory-wall {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 25px;
+            align-items: center;
+        }
+
+        .memory-card {
+            background: #fffdfb;
+            padding: 10px 10px 25px;
+            border-radius: 3px;
+            box-shadow: 0 8px 25px rgba(73,83,66,.12);
+            cursor: pointer;
+            transition: transform .3s ease, box-shadow .3s ease;
+            position: relative;
+        }
+
+        .memory-card:nth-child(odd) {
+            transform: rotate(-2deg);
+        }
+
+        .memory-card:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .memory-card:hover {
+            transform: rotate(0deg) translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(73,83,66,.2);
+            z-index: 3;
+        }
+
+        .memory-card img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            display: block;
+            background: #e6eee5;
+        }
+
+        .photo-label {
+            font-family: "Playfair Display", serif;
+            text-align: center;
+            margin-top: 13px;
+            color: #526958;
+        }
+
+        /* Help button */
+
+        .help-button {
+            display: block;
+            margin: 45px auto 0;
+            border: 1px solid #a88346;
+            background: transparent;
+            color: #8b6d38;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .help-button:hover {
+            background: #a88346;
+            color: white;
+        }
+
+        /* =========================
+           MEMORY POPUP
+        ========================= */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(40,53,43,.65);
+            z-index: 100;
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #fffaf7;
+            max-width: 550px;
+            width: 100%;
+            border-radius: 18px;
+            padding: 35px;
+            position: relative;
+            box-shadow: 0 25px 70px rgba(0,0,0,.25);
+            text-align: center;
+            animation: popIn .3s ease;
+        }
+
+        .modal-content h2 {
+            font-family: "DM Serif Display", serif;
+            color: #b5486d;
+            font-size: 2rem;
+        }
+
+        .modal-content p {
+            line-height: 1.8;
+            color: #59685c;
+        }
+
+        .clue {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f1f5ec;
+            border-left: 4px solid #a88346;
+            font-family: "Playfair Display", serif;
+            font-style: italic;
+            text-align: left;
+        }
+
+        .close-button {
+            margin-top: 25px;
+            background: #48614e;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        /* Help highlight */
+
+        .highlight {
+            animation: highlightPhoto 1s ease-in-out 3;
+            box-shadow: 0 0 0 5px #d6ad5b, 0 0 30px rgba(214,173,91,.8);
+        }
+
+        /* =========================
+           ANIMATIONS
+        ========================= */
 
         @keyframes heartbeat {
             0%, 100% {
@@ -76,50 +340,798 @@
             }
 
             50% {
-                transform: scale(1.15);
+                transform: scale(1.18);
             }
         }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes highlightPhoto {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .memory-wall {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .memory-card {
+                padding: 7px 7px 15px;
+            }
+
+            .photo-label {
+                font-size: .8rem;
+            }
+
+            .modal-content {
+                padding: 25px 20px;
+            }
+        }
+
     </style>
 </head>
 
 <body>
 
-    <div class="container">
+    <!-- =========================
+         HOME
+    ========================= -->
 
-        <div class="heart">💗</div>
+    <section id="home">
 
-        <h1>Happy Birthday!</h1>
+        <div class="home-card">
 
-        <p class="subtitle">
-            I made you a little something...
-        </p>
+            <div class="birthday-title">
+                Happy<br>Birthday
+            </div>
 
-        <button onclick="openSurprise()">
-            Open Your Surprise 💌
+            <div class="heart">💗</div>
+
+            <p class="birthday-subtitle">
+                To someone very special...
+            </p>
+
+            <p class="home-question">
+                I wrote you a letter, but I can't seem to find it.
+                <br>
+                <strong>Will you help me?</strong>
+            </p>
+
+            <div class="button-row">
+
+                <button class="answer-button yes-button"
+                        onclick="startHunt()">
+                    YES 💌
+                </button>
+
+                <button class="answer-button no-button"
+                        onclick="startHunt()"
+                        onmouseenter="this.innerHTML='Yes 💕'"
+                        onmouseleave="this.innerHTML='No 🙃'">
+                    No 🙃
+                </button>
+
+            </div>
+
+            <p class="tiny-note">
+                *There may or may not be a right answer.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MEMORY HUNT
+    ========================= -->
+
+    <section id="hunt">
+
+        <div class="hunt-header">
+
+            <div class="eyebrow">
+                A little birthday adventure
+            </div>
+
+            <h1 class="hunt-title">
+                The Lost Letter
+            </h1>
+
+            <p class="hunt-description">
+                The last place I remember having my letter was while
+                looking back through our memories...
+                <br><br>
+                So it has to be hiding somewhere in them.
+                <br><br>
+                Look through the memories, find the clues,
+                and follow them until you find my letter. 💌
+            </p>
+
+            <div class="progress-area">
+
+                <div class="progress-text">
+                    The letter is still missing...
+                </div>
+
+                <div class="progress-hearts" id="progressHearts">
+                    ♥ <span class="empty-heart">♥ ♥ ♥ ♥ ♥</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PHOTO WALL -->
+
+        <div class="memory-wall">
+
+            <!-- MEMORY 1 -->
+            <div class="memory-card"
+                 onclick="openMemory(1)"
+                 id="memory1">
+
+                <img src="https://placehold.co/600x600/f5d8e3/6b4051?text=Memory+1">
+
+                <div class="photo-label">
+                    Once upon a time...
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 2 -->
+            <div class="memory-card"
+                 onclick="openMemory(2)"
+                 id="memory2">
+
+                <img src="https://placehold.co/600x600/dcebdc/4c6552?text=Memory+2">
+
+                <div class="photo-label">
+                    A favorite day
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 3 -->
+            <div class="memory-card"
+                 onclick="openMemory(3)"
+                 id="memory3">
+
+                <img src="https://placehold.co/600x600/f0e1c7/69543b?text=Memory+3">
+
+                <div class="photo-label">
+                    One for the books
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 4 -->
+            <div class="memory-card"
+                 onclick="openMemory(4)"
+                 id="memory4">
+
+                <img src="https://placehold.co/600x600/e5dced/604d6c?text=Memory+4">
+
+                <div class="photo-label">
+                    We really did that...
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 5 -->
+            <div class="memory-card"
+                 onclick="openMemory(5)"
+                 id="memory5">
+
+                <img src="https://placehold.co/600x600/d9e8e0/456052?text=Memory+5">
+
+                <div class="photo-label">
+                    Somewhere beautiful
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 6 -->
+            <div class="memory-card"
+                 onclick="openMemory(6)"
+                 id="memory6">
+
+                <img src="https://placehold.co/600x600/f4dce5/74465a?text=Memory+6">
+
+                <div class="photo-label">
+                    A little chaos
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 7 -->
+            <div class="memory-card"
+                 onclick="openMemory(7)"
+                 id="memory7">
+
+                <img src="https://placehold.co/600x600/e3ead8/536347?text=Memory+7">
+
+                <div class="photo-label">
+                    Another adventure
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 8 -->
+            <div class="memory-card"
+                 onclick="openMemory(8)"
+                 id="memory8">
+
+                <img src="https://placehold.co/600x600/f2dfd0/79584a?text=Memory+8">
+
+                <div class="photo-label">
+                    Just us
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 9 -->
+            <div class="memory-card"
+                 onclick="openMemory(9)"
+                 id="memory9">
+
+                <img src="https://placehold.co/600x600/e0e6ef/52647b?text=Memory+9">
+
+                <div class="photo-label">
+                    A good one
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 10 -->
+            <div class="memory-card"
+                 onclick="openMemory(10)"
+                 id="memory10">
+
+                <img src="https://placehold.co/600x600/f1dce8/724b5c?text=Memory+10">
+
+                <div class="photo-label">
+                    Remember this?
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 11 -->
+            <div class="memory-card"
+                 onclick="openMemory(11)"
+                 id="memory11">
+
+                <img src="https://placehold.co/600x600/dbe9df/4f6755?text=Memory+11">
+
+                <div class="photo-label">
+                    One of my favorites
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 12 -->
+            <div class="memory-card"
+                 onclick="openMemory(12)"
+                 id="memory12">
+
+                <img src="https://placehold.co/600x600/f3e0c5/755b3d?text=Memory+12">
+
+                <div class="photo-label">
+                    Good times
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 13 -->
+            <div class="memory-card"
+                 onclick="openMemory(13)"
+                 id="memory13">
+
+                <img src="https://placehold.co/600x600/e9dcef/654b6d?text=Memory+13">
+
+                <div class="photo-label">
+                    This moment
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 14 -->
+            <div class="memory-card"
+                 onclick="openMemory(14)"
+                 id="memory14">
+
+                <img src="https://placehold.co/600x600/d8e9e0/456253?text=Memory+14">
+
+                <div class="photo-label">
+                    Somewhere we went
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 15 -->
+            <div class="memory-card"
+                 onclick="openMemory(15)"
+                 id="memory15">
+
+                <img src="https://placehold.co/600x600/f4dce1/754c5b?text=Memory+15">
+
+                <div class="photo-label">
+                    Always laughing
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 16 -->
+            <div class="memory-card"
+                 onclick="openMemory(16)"
+                 id="memory16">
+
+                <img src="https://placehold.co/600x600/e0e9d8/506247?text=Memory+16">
+
+                <div class="photo-label">
+                    A core memory
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 17 -->
+            <div class="memory-card"
+                 onclick="openMemory(17)"
+                 id="memory17">
+
+                <img src="https://placehold.co/600x600/f0dfd5/745649?text=Memory+17">
+
+                <div class="photo-label">
+                    That day...
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 18 -->
+            <div class="memory-card"
+                 onclick="openMemory(18)"
+                 id="memory18">
+
+                <img src="https://placehold.co/600x600/e0e0ed/5d5c75?text=Memory+18">
+
+                <div class="photo-label">
+                    A favorite place
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 19 -->
+            <div class="memory-card"
+                 onclick="openMemory(19)"
+                 id="memory19">
+
+                <img src="https://placehold.co/600x600/f3dbe5/74475a?text=Memory+19">
+
+                <div class="photo-label">
+                    Us being us
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 20 -->
+            <div class="memory-card"
+                 onclick="openMemory(20)"
+                 id="memory20">
+
+                <img src="https://placehold.co/600x600/dce9dd/4f6654?text=Memory+20">
+
+                <div class="photo-label">
+                    Another one
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 21 -->
+            <div class="memory-card"
+                 onclick="openMemory(21)"
+                 id="memory21">
+
+                <img src="https://placehold.co/600x600/f0dfc9/725a3f?text=Memory+21">
+
+                <div class="photo-label">
+                    We looked good
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 22 -->
+            <div class="memory-card"
+                 onclick="openMemory(22)"
+                 id="memory22">
+
+                <img src="https://placehold.co/600x600/e4dceb/604e6d?text=Memory+22">
+
+                <div class="photo-label">
+                    Another adventure
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 23 -->
+            <div class="memory-card"
+                 onclick="openMemory(23)"
+                 id="memory23">
+
+                <img src="https://placehold.co/600x600/dce8e0/506456?text=Memory+23">
+
+                <div class="photo-label">
+                    Almost there...
+                </div>
+
+            </div>
+
+
+            <!-- MEMORY 24 -->
+            <div class="memory-card"
+                 onclick="openMemory(24)"
+                 id="memory24">
+
+                <img src="https://placehold.co/600x600/f4dce5/754b5d?text=Memory+24">
+
+                <div class="photo-label">
+                    One last memory
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button class="help-button" onclick="giveHelp()">
+            🕵️ I'm stuck — give me a little help
         </button>
 
-        <div id="message">
-            <h2>For Someone Very Special 💕</h2>
+    </section>
 
-            <p>
-                Your birthday deserves more than just a text message,
-                so I decided to make you something.
+
+    <!-- =========================
+         MEMORY POPUP
+    ========================= -->
+
+    <div class="modal" id="memoryModal">
+
+        <div class="modal-content">
+
+            <h2 id="modalTitle">
+                A Memory
+            </h2>
+
+            <p id="modalText">
+                A memory will appear here.
             </p>
 
-            <p>
-                This is only the beginning...
-                there's more waiting for you. ✨
-            </p>
+            <div class="clue" id="modalClue">
+                There might be a clue hiding here...
+            </div>
+
+            <button class="close-button" onclick="closeMemory()">
+                Back to the memories 💗
+            </button>
+
         </div>
 
     </div>
 
+
     <script>
-        function openSurprise() {
-            document.getElementById("message").style.display = "block";
+
+        /* =========================
+           GAME DATA
+        ========================= */
+
+        let currentClue = 1;
+
+        /*
+            These are the memories that will eventually
+            contain REAL clues.
+
+            For now we're using placeholder text.
+
+            We'll change these once you give me
+            your real memories.
+        */
+
+        const cluePath = [4, 17, 8, 22, 11, 24];
+
+
+        const memories = {
+
+            1: {
+                title: "Once upon a time...",
+                text: "This is where we'll eventually put a real memory.",
+                clue: null
+            },
+
+            2: {
+                title: "A favorite day",
+                text: "Just a random memory for now.",
+                clue: null
+            },
+
+            3: {
+                title: "One for the books",
+                text: "Some memories don't hold clues... but they're still worth remembering.",
+                clue: null
+            },
+
+            4: {
+                title: "We really did that...",
+                text: "This will eventually contain your first real memory and clue.",
+                clue: "Your first clue will go here."
+            },
+
+            5: {
+                title: "Somewhere beautiful",
+                text: "A memory without a clue.",
+                clue: null
+            },
+
+            6: {
+                title: "A little chaos",
+                text: "A memory without a clue.",
+                clue: null
+            },
+
+            7: {
+                title: "Another adventure",
+                text: "A memory without a clue.",
+                clue: null
+            },
+
+            8: {
+                title: "Just us",
+                text: "This will eventually contain another memory and clue.",
+                clue: "Your second clue will go here."
+            },
+
+            9: {
+                title: "A good one",
+                text: "A random memory.",
+                clue: null
+            },
+
+            10: {
+                title: "Remember this?",
+                text: "A random memory.",
+                clue: null
+            },
+
+            11: {
+                title: "One of my favorites",
+                text: "This will eventually contain another clue.",
+                clue: "Another clue will eventually go here."
+            },
+
+            12: {
+                title: "Good times",
+                text: "A random memory.",
+                clue: null
+            },
+
+            13: {
+                title: "This moment",
+                text: "A random memory.",
+                clue: null
+            },
+
+            14: {
+                title: "Somewhere we went",
+                text: "A random memory.",
+                clue: null
+            },
+
+            15: {
+                title: "Always laughing",
+                text: "A random memory.",
+                clue: null
+            },
+
+            16: {
+                title: "A core memory",
+                text: "A random memory.",
+                clue: null
+            },
+
+            17: {
+                title: "That day...",
+                text: "This will eventually contain another clue.",
+                clue: "Another clue will eventually go here."
+            },
+
+            18: {
+                title: "A favorite place",
+                text: "A random memory.",
+                clue: null
+            },
+
+            19: {
+                title: "Us being us",
+                text: "A random memory.",
+                clue: null
+            },
+
+            20: {
+                title: "Another one",
+                text: "A random memory.",
+                clue: null
+            },
+
+            21: {
+                title: "We looked good",
+                text: "A random memory.",
+                clue: null
+            },
+
+            22: {
+                title: "Another adventure",
+                text: "This will eventually contain another clue.",
+                clue: "Another clue will eventually go here."
+            },
+
+            23: {
+                title: "Almost there...",
+                text: "A random memory.",
+                clue: null
+            },
+
+            24: {
+                title: "One last memory",
+                text: "This will eventually contain the final clue.",
+                clue: "The final clue will eventually go here."
+            }
+
+        };
+
+
+        /* =========================
+           START THE HUNT
+        ========================= */
+
+        function startHunt() {
+
+            document.getElementById("home").style.display = "none";
+
+            document.getElementById("hunt").style.display = "block";
+
+            window.scrollTo(0, 0);
         }
+
+
+        /* =========================
+           OPEN MEMORY
+        ========================= */
+
+        function openMemory(number) {
+
+            const memory = memories[number];
+
+            document.getElementById("modalTitle").innerText =
+                memory.title;
+
+            document.getElementById("modalText").innerText =
+                memory.text;
+
+            const clueBox =
+                document.getElementById("modalClue");
+
+            if (memory.clue) {
+
+                clueBox.style.display = "block";
+
+                clueBox.innerText = memory.clue;
+
+            } else {
+
+                clueBox.style.display = "none";
+
+            }
+
+            document.getElementById("memoryModal").style.display = "flex";
+        }
+
+
+        /* =========================
+           CLOSE MEMORY
+        ========================= */
+
+        function closeMemory() {
+
+            document.getElementById("memoryModal").style.display = "none";
+        }
+
+
+        /* =========================
+           HELP SYSTEM
+        ========================= */
+
+        function giveHelp() {
+
+            const nextMemory = cluePath[currentClue - 1];
+
+            const photo =
+                document.getElementById("memory" + nextMemory);
+
+            if (!photo) return;
+
+            photo.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+            photo.classList.remove("highlight");
+
+            void photo.offsetWidth;
+
+            photo.classList.add("highlight");
+        }
+
+
+        /* =========================
+           CLOSE MODAL IF CLICKING OUTSIDE
+        ========================= */
+
+        document.getElementById("memoryModal").addEventListener(
+            "click",
+            function(event) {
+
+                if (event.target === this) {
+                    closeMemory();
+                }
+
+            }
+        );
+
     </script>
 
 </body>
 </html>
-
